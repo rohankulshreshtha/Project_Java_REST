@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple markers</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <style>
+      html, body {
+        width: 500px;
+        height: 400px;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      function initMap() {
+        var myLatLng = {lat: 26, lng: 75};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: myLatLng
+          
+        });
+        var url='http://localhost:8080/Userproject/rest/location/getuser?radius=2&center_lat=26&centre_long=75';
+        $.getJSON(url, function (data) {
+            $.each(data, function (k, arr) {
+            	var marker = new google.maps.Marker({
+                    position: {lat: Number(arr.latitude), lng: Number(arr.longitude)},
+                    map: map,
+                    title: "lat "+arr.latitude+" lng "+arr.longitude
+                  });
+            });
+        });        
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdY8CI9QRnIGSaIcpvh8tanrcyaI9Ih78&callback=initMap"
+        async defer></script>
+  </body>
+</html>

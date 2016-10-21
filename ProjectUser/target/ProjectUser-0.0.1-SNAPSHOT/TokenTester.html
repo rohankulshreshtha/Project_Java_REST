@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+  <title>Token Tester</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+</head>
+
+<body>
+<h1>TOKEN TESTER</h1>
+		<p>
+			Token : <input type="text" id="id" name="token"  />
+		</p>
+		<input type="button" name="Token" id="token_id" value="Test" onclick="tokenTester()"/>
+		<p id="demo"></p>
+<script>
+function tokenTester() {
+	
+	var token = document.getElementById("id").value;
+	var url="http://localhost:8080/ProjectUser/rest/Token"
+   	 $.ajaxSetup({
+   		 
+  		  headers : {
+  			  "Authorization": token
+  		    
+  		  }
+  		});
+    
+	$.getJSON(url, function (data) {
+    	//console.log("inside getjson");
+        $.each(data, function (k, arr) {
+        	document.getElementById("demo").innerHTML = "id is :-"+arr;
+        });
+    });
+    
+    
+    
+	}
+     
+        	
+       </script>
+</body>
+
+</html>

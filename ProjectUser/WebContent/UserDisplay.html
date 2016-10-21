@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>User Display</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+</head>
+<body>
+<h1>users displayed</h1>
+  <script>
+  function userUpdate(user_id){
+               window.location="http://localhost:8080/ProjectUser/Update.html"+"?id="+user_id;
+               
+  }
+  </script>
+  
+  
+ <table id="myTable" cellpadding="2" cellspacing="2" border="1" onclick="tester()"></table>
+        <script>
+        var j=0
+        var table = document.getElementById("myTable");
+        var url='http://localhost:8080/ProjectUser/rest/getuser';
+        $.getJSON(url, function (data) {
+        	//console.log("inside getjson");
+            $.each(data, function (k, arr) {
+            	//console.log(arr)
+            	if(j==0){
+            		var row = table.insertRow(j);
+                    var cell0 = row.insertCell(0);
+                    var cell1 = row.insertCell(1);
+                    var cell2 = row.insertCell(2);
+                    var cell3 = row.insertCell(3);
+                    
+    				
+                    cell0.innerHTML = "name",
+                    cell1.innerHTML = "email_id",
+                    cell2.innerHTML = "phone_no",
+                    cell3.innerHTML = "upadte",
+                    j=j+1;
+            		
+            	}
+            	var row = table.insertRow(j);
+                var cell0 = row.insertCell(0);
+                var cell1 = row.insertCell(1);
+                var cell2 = row.insertCell(2);
+                var cell3 = row.insertCell(3);
+				
+                var user_id=arr.phone_no;
+                cell0.innerHTML = arr.name,
+                cell1.innerHTML = arr.email_id,
+                cell2.innerHTML = arr.phone_no,
+                // cell3.innerHTML = "<a href="+"Forgot.html"+">Update User</a>",
+                cell3.innerHTML ="<td>"+"<input type="+"'button'"+"onclick="+"'userUpdate("+user_id+")'"+"value="+"'update'"+"/>"+"</td>",
+                j=j+1;
+                //console.log(j);
+            });
+        });
+       
+        </script>
+       
+ 
+    </body>
+</body>
+</html>
+
